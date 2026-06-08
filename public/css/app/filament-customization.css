@@ -1,0 +1,324 @@
+/* Filament Topbar Customization */
+
+/* Blue topbar only when the System theme option is active */
+.fi-theme-system .fi-topbar {
+    background-color: #06142f !important;
+    border-bottom-color: #0b1f4d !important;
+    box-shadow: 0 1px 2px rgba(242, 235, 235, 0.05) !important;
+}
+
+/* Brand block: logo + stacked title */
+.fi-topbar-brand,
+.fi-topbar-brand .fi-topbar-brand-text,
+.fi-topbar-logo-link,
+.fi-topbar-logo-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+}
+
+.fi-topbar-brand-text {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    line-height: 1;
+    text-align: left;
+}
+
+/* Ensure logo renders inline and doesn't force text below */
+.fi-logo,
+.fi-logo img {
+    display: inline-block;
+    vertical-align: middle;
+    max-height: 2.5rem;
+}
+
+.fi-topbar-title {
+    color: #111827;
+    font-weight: 700;
+    font-size: 0.875rem;
+    letter-spacing: 0.02em;
+}
+
+.fi-topbar-subtitle {
+    color: #4b5563;
+    font-size: 0.75rem;
+    opacity: 0.9;
+}
+
+.dark .fi-topbar-title,
+.fi-theme-system .fi-topbar-title,
+.fi-theme-system .fi-topbar-subtitle {
+    color: #ffffff;
+}
+
+.dark .fi-topbar-subtitle {
+    color: #d1d5db;
+}
+
+/* User avatar styling */
+.fi-user-avatar,
+.fi-user-menu .fi-user-avatar,
+.topbar-user-trigger .fi-user-avatar {
+    background-color: #111827 !important;
+    background: #111827 !important;
+    color: #ffffff !important;
+    font-weight: 600 !important;
+    border: 2px solid #111827 !important;
+    box-shadow: none !important;
+    width: 2.5rem;
+    height: 2.5rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 9999px;
+}
+
+.dark .fi-user-avatar,
+.dark .fi-user-menu .fi-user-avatar,
+.dark .topbar-user-trigger .fi-user-avatar {
+    background-color: #ffffff !important;
+    background: #ffffff !important;
+    color: #111827 !important;
+    border-color: #ffffff !important;
+}
+
+.fi-theme-system .fi-user-avatar,
+.fi-theme-system .fi-user-menu .fi-user-avatar,
+.fi-theme-system .topbar-user-trigger .fi-user-avatar {
+    background-color: #ffffff !important;
+    background: #ffffff !important;
+    color: #06142f !important;
+    border-color: #ffffff !important;
+}
+
+.fi-user-avatar-initial {
+    font-size: 1rem;
+    line-height: 1;
+}
+
+.fi-user-avatar img {
+    border-radius: 9999px;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Topbar end area */
+.fi-topbar-end {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding-right: 0.75rem;
+}
+
+/* Icon buttons in topbar use light color on the blue System topbar */
+.fi-theme-system .fi-topbar .fi-icon-btn,
+.fi-theme-system .fi-topbar-open-sidebar-btn,
+.fi-theme-system .fi-topbar-close-sidebar-btn,
+.fi-theme-system .fi-topbar-open-collapse-sidebar-btn,
+.fi-theme-system .fi-topbar-close-collapse-sidebar-btn {
+    color: #ffffff !important;
+}
+
+/* Nav items */
+.fi-theme-system .fi-topbar-nav-groups .fi-topbar-item {
+    color: #ffffff !important;
+}
+
+/* Theme switcher active state */
+.fi-theme-switcher-btn,
+.fi-theme-switcher-btn svg {
+    color: #6b7280 !important;
+}
+
+.fi-theme-switcher-btn.fi-active {
+    background-color: #e5e7eb !important;
+    color: #374151 !important;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.16) inset !important;
+}
+
+.fi-theme-switcher-btn.fi-active svg {
+    color: #374151 !important;
+}
+
+.dark .fi-theme-switcher-btn,
+.dark .fi-theme-switcher-btn svg {
+    color: #9ca3af !important;
+}
+
+.dark .fi-theme-switcher-btn.fi-active {
+    background-color: rgba(255, 255, 255, 0.12) !important;
+    color: #ffffff !important;
+}
+
+.dark .fi-theme-switcher-btn.fi-active svg {
+    color: #ffffff !important;
+}
+
+.fi-theme-system .fi-theme-switcher-btn,
+.fi-theme-system .fi-theme-switcher-btn svg {
+    color: rgba(255, 255, 255, 0.72) !important;
+}
+
+.fi-theme-system .fi-theme-switcher-btn.fi-active {
+    background-color: rgba(255, 255, 255, 0.14) !important;
+    color: #ffffff !important;
+    box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.34) inset !important;
+}
+
+.fi-theme-system .fi-theme-switcher-btn.fi-active svg {
+    color: #ffffff !important;
+}
+
+/* Username styling beside avatar in topbar */
+.fi-user-name {
+    color: #111827 !important;
+    font-size: 0.95rem;
+    margin-left: 0.25rem;
+}
+
+.fi-user-role {
+    color: #4b5563 !important;
+}
+
+.dark .fi-user-name,
+.dark .fi-user-role {
+    color: #ffffff !important;
+}
+
+/* Topbar trigger adjustments for spacing */
+.topbar-user-trigger {
+    background: transparent;
+    border: none;
+    display: inline-flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    gap: 0.5rem !important;
+    text-align: left;
+    white-space: nowrap;
+}
+
+.topbar-user-trigger .fi-user-meta {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    justify-content: center !important;
+    text-align: left;
+}
+
+.fi-theme-system .topbar-user-trigger .fi-user-name,
+.fi-theme-system .topbar-user-trigger .fi-user-role {
+    color: #ffffff !important;
+}
+
+/* User dropdown follows System blue theme only when System is active */
+.fi-theme-system .fi-dropdown-panel {
+    background-color: #06142f !important;
+    background: #06142f !important;
+    border-color: rgba(255, 255, 255, 0.12) !important;
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.38) !important;
+}
+
+.fi-theme-system .fi-dropdown-list {
+    background: transparent !important;
+}
+
+.fi-theme-system .fi-dropdown-header,
+.fi-theme-system .fi-dropdown-header span,
+.fi-theme-system .fi-dropdown-header svg,
+.fi-theme-system .fi-dropdown-list-item,
+.fi-theme-system .fi-dropdown-list-item-label,
+.fi-theme-system .fi-dropdown-list-item svg {
+    color: #ffffff !important;
+}
+
+.fi-theme-system .fi-dropdown-list-item:hover {
+    background-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+/* Blue sidebar only when the System theme option is active */
+.fi-theme-system .fi-sidebar,
+.fi-theme-system .fi-main-sidebar,
+.fi-theme-system .fi-sidebar-header-ctn,
+.fi-theme-system .fi-sidebar-header,
+.fi-theme-system .fi-sidebar-nav,
+.fi-theme-system .fi-sidebar-footer {
+    background-color: #06142f !important;
+    background: #06142f !important;
+    border-color: rgba(255, 255, 255, 0.08) !important;
+}
+
+.fi-theme-system .fi-sidebar-group-label {
+    color: rgba(219, 232, 255, 0.86) !important;
+}
+
+.fi-theme-system .fi-sidebar-item-label,
+.fi-theme-system .fi-sidebar-item-icon,
+.fi-theme-system .fi-sidebar-group-collapse-btn,
+.fi-theme-system .fi-sidebar-group-btn {
+    color: #ffffff !important;
+}
+
+.fi-theme-system .fi-sidebar-item-btn {
+    color: #ffffff !important;
+}
+
+.fi-theme-system .fi-sidebar-item.fi-active .fi-sidebar-item-btn,
+.fi-theme-system .fi-sidebar-item-btn:hover {
+    background-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+/* Keep topbar layout aligned */
+.fi-topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* Dashboard full image */
+html:has(.dashboard-full-hero),
+body:has(.dashboard-full-hero),
+.fi-body:has(.dashboard-full-hero) {
+    overflow: hidden !important;
+}
+
+.fi-main:has(.dashboard-full-hero) {
+    width: 100% !important;
+    max-width: none !important;
+    min-height: calc(100vh - 5.5rem);
+    height: calc(100vh - 5.5rem);
+    overflow: hidden !important;
+    padding: 0 !important;
+}
+
+.fi-page:has(.dashboard-full-hero),
+.fi-page:has(.dashboard-full-hero) .fi-page-header-main-ctn,
+.fi-page:has(.dashboard-full-hero) .fi-page-main,
+.fi-page:has(.dashboard-full-hero) .fi-page-content {
+    width: 100%;
+    height: 100%;
+    min-height: 0;
+    overflow: hidden !important;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+.dashboard-full-hero {
+    width: 100%;
+    height: 100%;
+    min-height: 0;
+    overflow: hidden;
+    background: #06142f;
+}
+
+.dashboard-full-hero img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+    object-position: center;
+}
