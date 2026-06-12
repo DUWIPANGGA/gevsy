@@ -466,22 +466,24 @@
             </button>
             
             <!-- AI Notulen -->
-            <button id="aiNotulenTriggerBtn" class="flex flex-col items-center text-white hover:text-gray-200 transition toolbar-btn relative">
-                <div class="h-12 flex items-center justify-center">
-                    <svg class="w-10 h-10" fill="currentColor" viewBox="0 0 24 24"><path d="M7.5 5.6L10 7 8.6 4.5 10 2 7.5 3.4 5 2l1.4 2.5L5 7zm12 9.8L17 14l1.4 2.5L17 19l2.5-1.4L22 19l-1.4-2.5L22 14zM22 2l-2.5 1.4L17 2l1.4 2.5L17 7l2.5-1.4L22 7l-1.4-2.5zm-7.63 5.29c-.39-.39-1.02-.39-1.41 0L1.29 18.96c-.39.39-.39 1.02 0 1.41l2.34 2.34c.39.39 1.02.39 1.41 0L16.7 11.05c.39-.39.39-1.02 0-1.41l-2.33-2.35zm-1.03 5.49l-2.12-2.12 2.44-2.44 2.12 2.12-2.44 2.44z"/></svg>
-                </div>
-                <span class="text-sm font-semibold mt-1">AI Notulen</span>
-                <span id="aiNotulenActiveDot" class="hidden absolute top-0 right-2 w-3 h-3 bg-red-500 rounded-full animate-pulse border-2 border-[#9ea3a8]"></span>
-                <div id="aiLoadingOverlay" class="absolute bottom-full left-1/2 -translate-x-1/2 mb-3 z-[60] hidden opacity-0 transition-opacity duration-300 pointer-events-none">
-                    <div class="flex items-center gap-3 bg-gray-900/95 border border-gray-700/80 rounded-xl px-4 py-2.5 shadow-2xl backdrop-blur-sm whitespace-nowrap">
+            <div class="relative flex flex-col items-center">
+                <button id="aiNotulenTriggerBtn" class="flex flex-col items-center text-white hover:text-gray-200 transition toolbar-btn relative">
+                    <div class="h-12 flex items-center justify-center">
+                        <svg class="w-10 h-10" fill="currentColor" viewBox="0 0 24 24"><path d="M7.5 5.6L10 7 8.6 4.5 10 2 7.5 3.4 5 2l1.4 2.5L5 7zm12 9.8L17 14l1.4 2.5L17 19l2.5-1.4L22 19l-1.4-2.5L22 14zM22 2l-2.5 1.4L17 2l1.4 2.5L17 7l2.5-1.4L22 7l-1.4-2.5zm-7.63 5.29c-.39-.39-1.02-.39-1.41 0L1.29 18.96c-.39.39-.39 1.02 0 1.41l2.34 2.34c.39.39 1.02.39 1.41 0L16.7 11.05c.39-.39.39-1.02 0-1.41l-2.33-2.35zm-1.03 5.49l-2.12-2.12 2.44-2.44 2.12 2.12-2.44 2.44z"/></svg>
+                    </div>
+                    <span class="text-sm font-semibold mt-1">AI Notulen</span>
+                    <span id="aiNotulenActiveDot" class="hidden absolute top-0 right-2 w-3 h-3 bg-red-500 rounded-full animate-pulse border-2 border-[#9ea3a8]"></span>
+                </button>
+                <div id="aiLoadingOverlay" class="hidden absolute bottom-full mb-4 left-1/2 -translate-x-1/2 w-72 bg-white rounded-lg shadow-xl border border-gray-200 p-4 text-gray-800 z-50 transition-opacity opacity-0">
+                    <div class="flex items-center gap-3">
                         <div class="animate-spin rounded-full h-4 w-4 border-t-2 border-b-2 border-violet-500 shrink-0"></div>
                         <div>
-                            <p class="text-sm font-semibold text-white">AI Sedang Menyusun Notulensi...</p>
-                            <p class="text-xs text-gray-400">Menganalisis transkrip percakapan</p>
+                            <p class="font-semibold text-sm text-gray-900">AI Sedang Menyusun Notulensi...</p>
+                            <p class="text-xs text-gray-500 mt-0.5">Menganalisis transkrip percakapan</p>
                         </div>
                     </div>
                 </div>
-            </button>
+            </div>
 
             <!-- Share -->
             <div class="relative flex flex-col items-center">
