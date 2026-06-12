@@ -552,16 +552,19 @@
                 </div>
                 <span class="text-sm font-semibold mt-1">Rekam</span>
                 <span id="recordActiveDot" class="hidden absolute -top-0.5 right-1 w-2.5 h-2.5 bg-red-500 rounded-full animate-pulse"></span>
-                <div id="recordingPopup" class="hidden absolute bottom-full left-1/2 -translate-x-1/2 mb-3 z-[60] opacity-0 transition-opacity duration-300 pointer-events-none whitespace-nowrap">
-                    <div class="flex items-center gap-3 bg-gray-900/95 border border-red-500/50 rounded-xl px-4 py-2.5 shadow-2xl backdrop-blur-sm">
-                        <span class="flex h-2.5 w-2.5 relative">
+                <div id="recordingPopup" class="hidden absolute bottom-full left-1/2 -translate-x-1/2 mb-3 z-[60] opacity-0 transition-opacity duration-300 min-w-[260px]">
+                    <div class="flex items-start gap-3 bg-gray-900/95 border border-red-500/50 rounded-xl px-4 py-3 shadow-2xl backdrop-blur-sm">
+                        <span class="flex h-2.5 w-2.5 relative mt-1 shrink-0">
                             <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
                             <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-red-500"></span>
                         </span>
-                        <div>
+                        <div class="flex-1 min-w-0">
                             <p class="text-sm font-semibold text-white">Meeting sedang direkam</p>
-                            <p id="recordingByName" class="text-xs text-gray-400">oleh Anda</p>
+                            <p id="recordingByName" class="text-xs text-gray-400 truncate">oleh Anda</p>
                         </div>
+                        <button id="recordingPopupClose" class="text-gray-500 hover:text-white transition shrink-0 -mr-1">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+                        </button>
                     </div>
                 </div>
             </button>
@@ -1663,6 +1666,13 @@
                 } else {
                     await startScreenRecording();
                 }
+            });
+        }
+        const recordingPopupClose = document.getElementById('recordingPopupClose');
+        if (recordingPopupClose) {
+            recordingPopupClose.addEventListener('click', (e) => {
+                e.stopPropagation();
+                hideRecordingPopup();
             });
         }
 
