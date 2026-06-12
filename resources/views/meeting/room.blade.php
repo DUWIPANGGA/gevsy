@@ -552,6 +552,18 @@
                 </div>
                 <span class="text-sm font-semibold mt-1">Rekam</span>
                 <span id="recordActiveDot" class="hidden absolute -top-0.5 right-1 w-2.5 h-2.5 bg-red-500 rounded-full animate-pulse"></span>
+                <div id="recordingPopup" class="hidden absolute bottom-full left-1/2 -translate-x-1/2 mb-3 z-[60] opacity-0 transition-opacity duration-300 pointer-events-none whitespace-nowrap">
+                    <div class="flex items-center gap-3 bg-gray-900/95 border border-red-500/50 rounded-xl px-4 py-2.5 shadow-2xl backdrop-blur-sm">
+                        <span class="flex h-2.5 w-2.5 relative">
+                            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+                            <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-red-500"></span>
+                        </span>
+                        <div>
+                            <p class="text-sm font-semibold text-white">Meeting sedang direkam</p>
+                            <p id="recordingByName" class="text-xs text-gray-400">oleh Anda</p>
+                        </div>
+                    </div>
+                </div>
             </button>
             
             <!-- Akhiri -->
@@ -682,6 +694,7 @@
         let pinnedIdentities = [];
         let currentLayout = localStorage.getItem('layout_' + @json($meeting->id)) || 'grid';
         let isRecordingScreen = false;
+        let recordingByOther = false;
         let recordingMediaRecorder = null;
         let recordingChunks = [];
         let recordingCanvasCtx = null;
@@ -1719,6 +1732,21 @@
                 if (data.type === 'screen-share-stop') {
                     if (!isScreenSharing) hideScreenShare();
                 }
+                if (data.type === 'screen-recording-start') {
+                    if (data.sender_id && Number(data.sender_id) === currentUserId) return;
+                    recordingByOther = true;
+                    if (recordScreenBtn) {
+                        recordScreenBtn.classList.add('opacity-40', 'pointer-events-none');
+                    }
+                    showRecordingPopup(true, data.name || 'Peserta lain');
+                }
+                if (data.type === 'screen-recording-stop') {
+                    recordingByOther = false;
+                    if (recordScreenBtn) {
+                        recordScreenBtn.classList.remove('opacity-40', 'pointer-events-none');
+                    }
+                    hideRecordingPopup();
+                }
             });
         }
 
@@ -1964,6 +1992,7 @@
         // ======================== SCREEN RECORDING ========================
         async function startScreenRecording() {
             if (isRecordingScreen) return;
+            if (recordingByOther) { alert('Meeting sedang direkam oleh peserta lain.'); return; }
             recordingCanvas = document.getElementById('recordingCanvas');
             if (!recordingCanvas) { alert('Canvas not found'); return; }
             recordingCanvasCtx = recordingCanvas.getContext('2d');
@@ -2170,6 +2199,8 @@
             if (recordIconActive) recordIconActive.classList.remove('hidden');
             if (recordActiveDot) recordActiveDot.classList.remove('hidden');
             if (recordScreenBtn) recordScreenBtn.querySelector('span')?.classList.add('text-red-400');
+            showRecordingPopup(true, null);
+            sendBroadcast({ type: 'screen-recording-start', name: authName, sender_id: currentUserId });
         }
 
         function stopScreenRecording() {
@@ -2193,6 +2224,8 @@
             if (recordIconActive) recordIconActive.classList.add('hidden');
             if (recordActiveDot) recordActiveDot.classList.add('hidden');
             if (recordScreenBtn) recordScreenBtn.querySelector('span')?.classList.remove('text-red-400');
+            hideRecordingPopup();
+            sendBroadcast({ type: 'screen-recording-stop' });
         }
 
         async function uploadScreenRecording(blob) {
@@ -2319,6 +2352,22 @@
                 setTimeout(() => overlay.classList.add('hidden'), 300);
             }
         }
+
+        function showRecordingPopup(show, name) {
+            const popup = document.getElementById('recordingPopup');
+            if (!popup) return;
+            const nameEl = document.getElementById('recordingByName');
+            if (nameEl && name) nameEl.textContent = 'oleh ' + name;
+            if (nameEl && !name) nameEl.textContent = 'oleh Anda';
+            if (show) {
+                popup.classList.remove('hidden');
+                setTimeout(() => popup.classList.add('opacity-100'), 50);
+            } else {
+                popup.classList.remove('opacity-100');
+                setTimeout(() => popup.classList.add('hidden'), 300);
+            }
+        }
+        function hideRecordingPopup() { showRecordingPopup(false); }
 
         function openNotulensiModal(open) {
             if (!notulensiModal) return;
