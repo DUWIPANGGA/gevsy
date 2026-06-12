@@ -448,7 +448,8 @@
             <!-- Kamera -->
             <button id="cameraBtn" class="flex flex-col items-center text-white hover:text-gray-200 transition toolbar-btn">
                 <div class="h-12 flex items-center justify-center">
-                    <svg class="w-10 h-10" fill="currentColor" viewBox="0 0 24 24"><path d="M17 10.5V7c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1v10c0 .55.45 1 1 1h12c.55 0 1-.45 1-1v-3.5l4 4v-11l-4 4z"/></svg>
+                    <svg id="camIcon" class="w-10 h-10" fill="currentColor" viewBox="0 0 24 24"><path d="M17 10.5V7c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1v10c0 .55.45 1 1 1h12c.55 0 1-.45 1-1v-3.5l4 4v-11l-4 4z"/></svg>
+                    <svg id="camOffIcon" class="w-10 h-10 hidden" fill="currentColor" viewBox="0 0 24 24"><path d="M21 6.5l-4 4V7c0-.55-.45-1-1-1H9.82L21 17.18V6.5zM3.27 2L2 3.27 4.73 6H4c-.55 0-1 .45-1 1v10c0 .55.45 1 1 1h12c.21 0 .39-.08.54-.18L19.73 21 21 19.73 3.27 2z"/></svg>
                 </div>
                 <span class="text-sm font-semibold mt-1">Kamera</span>
             </button>
@@ -758,6 +759,14 @@
                 micOff.classList.toggle('hidden', !muted);
             }
         }
+        function toggleCamIcons(off) {
+            const cam = document.getElementById('camIcon');
+            const camOff = document.getElementById('camOffIcon');
+            if (cam && camOff) {
+                cam.classList.toggle('hidden', off);
+                camOff.classList.toggle('hidden', !off);
+            }
+        }
         function applyDeviceState() {
             if (muteBtn) {
                 muteBtn.classList.toggle('text-red-400', isMuted);
@@ -767,6 +776,7 @@
             if (cameraBtn) {
                 cameraBtn.classList.toggle('text-red-400', isCameraOff);
                 cameraBtn.classList.toggle('text-white', !isCameraOff);
+                toggleCamIcons(isCameraOff);
             }
             if (localAvatar) localAvatar.classList.toggle('hidden', !isCameraOff);
             if (localAvatarText && isCameraOff) localAvatarText.textContent = authName.charAt(0).toUpperCase();
@@ -2412,6 +2422,7 @@
                     if (localAvatar) localAvatar.classList.add('hidden');
                     stopAudioMonitor();
                 }
+                toggleCamIcons(isCameraOff);
                 sendBroadcast({ type: 'camera-toggle', isOff: isCameraOff });
             });
         }
