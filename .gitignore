@@ -25,3 +25,7 @@ Thumbs.db
 /whisper_server/models
 /whisper_server/__pycache__
 
+# FFmpeg binaries (download manually)
+/ffmpeg/bin/*.exe
+/ffmpeg/bin/*.dll
+

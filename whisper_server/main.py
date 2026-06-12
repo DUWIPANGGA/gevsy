@@ -40,6 +40,11 @@ COMPUTE_TYPE = os.getenv("WHISPER_COMPUTE_TYPE", "int8")
 HOST = os.getenv("HOST", "127.0.0.1")
 PORT = int(os.getenv("PORT", "8001"))
 
+FFMPEG_PATH = os.getenv("FFMPEG_PATH", os.path.join(
+    os.path.dirname(os.path.abspath(__file__)),
+    "..", "ffmpeg", "bin", "ffmpeg.exe"
+))
+
 LOCAL_MODEL_DIR = os.path.join(
     os.path.dirname(os.path.abspath(__file__)),
     "models",
@@ -161,7 +166,7 @@ async def transcribe(file: UploadFile = File(...)):
         output_path = input_path + ".wav"
         import subprocess
         ffmpeg_cmd = [
-            "ffmpeg", "-y",
+            FFMPEG_PATH, "-y",
             "-i", input_path,
             "-ar", "16000",
             "-ac", "1",

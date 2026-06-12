@@ -5,15 +5,14 @@ declare(strict_types=1);
 namespace App\Services;
 
 use Illuminate\Support\Facades\Log;
-use Symfony\Component\Process\ExecutableFinder;
 use Symfony\Component\Process\Process;
 
 class AudioExtractionService
 {
     public function extractToMp3(string $absoluteInputPath, string $absoluteOutputPath): bool
     {
-        $ffmpeg = (new ExecutableFinder)->find('ffmpeg');
-        if ($ffmpeg === null) {
+        $ffmpeg = base_path('ffmpeg/bin/ffmpeg.exe');
+        if (!file_exists($ffmpeg)) {
             Log::info('ffmpeg not found; skipping audio extraction', [
                 'input' => $absoluteInputPath,
             ]);
