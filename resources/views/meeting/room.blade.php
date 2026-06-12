@@ -468,6 +468,15 @@
                 </div>
                 <span class="text-sm font-semibold mt-1">AI Notulen</span>
                 <span id="aiNotulenActiveDot" class="hidden absolute top-0 right-2 w-3 h-3 bg-red-500 rounded-full animate-pulse border-2 border-[#9ea3a8]"></span>
+                <div id="aiLoadingOverlay" class="absolute bottom-full left-1/2 -translate-x-1/2 mb-3 z-[60] hidden opacity-0 transition-opacity duration-300 pointer-events-none">
+                    <div class="flex items-center gap-3 bg-gray-900/95 border border-gray-700/80 rounded-xl px-4 py-2.5 shadow-2xl backdrop-blur-sm whitespace-nowrap">
+                        <div class="animate-spin rounded-full h-4 w-4 border-t-2 border-b-2 border-violet-500 shrink-0"></div>
+                        <div>
+                            <p class="text-sm font-semibold text-white">AI Sedang Menyusun Notulensi...</p>
+                            <p class="text-xs text-gray-400">Menganalisis transkrip percakapan</p>
+                        </div>
+                    </div>
+                </div>
             </button>
 
             <!-- Share -->
@@ -658,31 +667,6 @@
             </div>
         </div>
     </div>
-
-    <div id="aiLoadingOverlay"
-        class="fixed inset-0 bg-black/85 backdrop-blur-sm flex flex-col items-center justify-center z-[60] hidden opacity-0 transition-opacity duration-300">
-        <div class="flex flex-col items-center space-y-6 text-center max-w-md p-6">
-            <div class="relative">
-                <div class="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-violet-500"></div>
-                <div class="absolute animate-ping rounded-full h-12 w-12 bg-violet-400/20"></div>
-            </div>
-            <div>
-                <h3 class="text-lg font-bold text-white">AI Sedang Menyusun Notulensi</h3>
-                <p class="text-sm text-gray-400">Gemini sedang menganalisis transkrip percakapan...</p>
-            </div>
-            <div class="w-full bg-gray-800 h-1.5 rounded-full overflow-hidden">
-                <div class="bg-violet-500 h-full absolute top-0 left-0 animate-[loading-bar_3s_infinite_linear]"
-                    style="width:50%"></div>
-            </div>
-        </div>
-    </div>
-
-    <style>
-        @keyframes loading-bar {
-            0% { left: -50% }
-            100% { left: 100% }
-        }
-    </style>
 
     <script>
         // ======================== DEKLARASI VARIABEL ========================
