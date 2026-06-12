@@ -1,6 +1,32 @@
 @extends('layouts.app')
 
 @section('content')
+<style>
+    :root .empty-state-light h3,
+    :root .empty-state-light p {
+        color: #000000 !important;
+    }
+    :root .btn-rapat-baru {
+        background: #000000;
+        color: #ffffff;
+    }
+    :root .btn-rapat-baru:hover {
+        background: #1a1a1a;
+    }
+    .dark .empty-state-light h3 {
+        color: var(--text-secondary) !important;
+    }
+    .dark .empty-state-light p {
+        color: var(--text-muted) !important;
+    }
+    .dark .btn-rapat-baru {
+        background: linear-gradient(135deg, #7c3aed, #4f46e5);
+        color: #fff;
+    }
+    .dark .btn-rapat-baru:hover {
+        background: linear-gradient(135deg, #6d28d9, #4338ca);
+    }
+</style>
 <div class="p-6 w-full max-w-7xl mx-auto">
     {{-- Header --}}
     <div class="flex items-center justify-between mb-8">
@@ -26,15 +52,15 @@
 
     {{-- Empty State --}}
     @if($videos->isEmpty())
-        <div class="page-card flex flex-col items-center justify-center py-24 text-center">
+        <div class="page-card flex flex-col items-center justify-center py-24 text-center empty-state-light">
             <div class="w-20 h-20 rounded-full flex items-center justify-center mb-4" style="background:rgba(139,92,246,0.08)">
                 <svg class="w-10 h-10 text-violet-400" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/>
                 </svg>
             </div>
-            <h3 class="text-lg font-semibold mb-1" style="color:var(--text-secondary)">Belum Ada Rekaman Video</h3>
-            <p class="text-sm mb-6 max-w-sm" style="color:var(--text-muted)">Rekaman layar rapat akan muncul di sini setelah Anda merekamnya melalui fitur Rekam Layar di dalam ruang rapat.</p>
-            <a href="{{ route('meeting.join.form') }}" class="inline-flex items-center gap-2 bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-500 hover:to-indigo-500 text-white font-medium py-2.5 px-6 rounded-lg transition shadow-lg shadow-violet-500/20">
+            <h3 class="text-lg font-semibold mb-1">Belum Ada Rekaman Video</h3>
+            <p class="text-sm mb-6 max-w-sm">Rekaman layar rapat akan muncul di sini setelah Anda merekamnya melalui fitur Rekam Layar di dalam ruang rapat.</p>
+            <a href="{{ route('meeting.join.form') }}" class="inline-flex items-center gap-2 font-medium py-2.5 px-6 rounded-lg transition shadow-lg btn-rapat-baru">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
                 </svg>
                 Buat Rapat Baru

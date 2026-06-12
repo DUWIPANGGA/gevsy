@@ -20,29 +20,32 @@
 
         /* ── Theme variables ── */
         :root {
-            --app-bg: radial-gradient(ellipse 70% 50% at 0% 80%, rgba(139,92,246,0.06) 0%, transparent 60%),
-                       radial-gradient(ellipse 60% 40% at 100% 20%, rgba(6,182,212,0.04) 0%, transparent 50%),
-                       linear-gradient(160deg, #f0f2f5 0%, #e8eaf0 50%, #e2e5ec 100%);
-            --glass-bg: rgba(255,255,255,0.85);
-            --glass-border: rgba(0,0,0,0.08);
+            --app-bg: linear-gradient(160deg, #f0f2f5 0%, #e8eaf0 50%, #e2e5ec 100%);
+            --glass-bg: rgba(255,255,255,0.9);
+            --glass-border: #e2e8f0;
             --glass-shadow: 0 4px 24px rgba(0,0,0,0.06);
-            --text-primary: #111827;
-            --text-secondary: #4b5563;
-            --text-muted: #9ca3af;
+            --text-primary: #0f172a;
+            --text-secondary: #1e293b;
+            --text-muted: #64748b;
             --nav-link-hover: rgba(139,92,246,0.08);
             --nav-link-active: rgba(139,92,246,0.12);
-            --sidebar-bg: rgba(255,255,255,0.85);
-            --card-bg: rgba(255,255,255,0.9);
-            --card-border: rgba(0,0,0,0.08);
+            --sidebar-bg: #1d4ed8;
+            --sidebar-text: #ffffff;
+            --card-bg: rgba(255,255,255,0.95);
+            --card-border: #e2e8f0;
             --card-shadow: 0 4px 20px rgba(0,0,0,0.06);
-            --dropdown-bg: rgba(255,255,255,0.97);
-            --divider: rgba(0,0,0,0.06);
+            --dropdown-bg: rgba(255,255,255,0.98);
+            --divider: #e2e8f0;
             --avatar-gradient: linear-gradient(135deg, #7c3aed, #a78bfa);
             --scrollbar-thumb: rgba(139,92,246,0.2);
             --scrollbar-thumb-hover: rgba(139,92,246,0.35);
-            --surface-bg: rgba(255,255,255,0.6);
-            --input-bg: rgba(255,255,255,0.8);
-            --input-border: rgba(0,0,0,0.1);
+            --surface-bg: rgba(255,255,255,0.7);
+            --input-bg: rgba(255,255,255,0.9);
+            --input-border: #cbd5e1;
+            --accent: #7c3aed;
+            --hover-bg: rgba(0,0,0,0.05);
+            --navbar-bg: #2563eb;
+            --navbar-text: #ffffff;
         }
         .dark {
             --app-bg: radial-gradient(ellipse 70% 50% at 0% 80%, rgba(139,92,246,0.08) 0%, transparent 60%),
@@ -51,12 +54,13 @@
             --glass-bg: rgba(15,15,25,0.88);
             --glass-border: rgba(255,255,255,0.06);
             --glass-shadow: 0 4px 24px rgba(0,0,0,0.3);
-            --text-primary: #f3f4f6;
-            --text-secondary: #9ca3af;
-            --text-muted: #6b7280;
+            --text-primary: #ffffff;
+            --text-secondary: #e5e7eb;
+            --text-muted: #d1d5db;
             --nav-link-hover: rgba(139,92,246,0.1);
             --nav-link-active: rgba(139,92,246,0.15);
-            --sidebar-bg: rgba(15,15,25,0.7);
+            --sidebar-bg: #152a47;
+            --sidebar-text: #ffffff;
             --card-bg: rgba(255,255,255,0.06);
             --card-border: rgba(255,255,255,0.06);
             --card-shadow: 0 8px 32px rgba(0,0,0,0.3);
@@ -68,6 +72,10 @@
             --surface-bg: rgba(255,255,255,0.03);
             --input-bg: rgba(255,255,255,0.05);
             --input-border: rgba(255,255,255,0.08);
+            --accent: #a78bfa;
+            --hover-bg: rgba(255,255,255,0.07);
+            --navbar-bg: #1e3a5f;
+            --navbar-text: #ffffff;
         }
 
         #sidebar { transition: transform 0.3s ease, width 0.3s ease, padding 0.3s ease; }
@@ -75,17 +83,29 @@
 
         .app-bg { background: var(--app-bg); }
         .glass-nav {
-            background: var(--glass-bg);
+            background: var(--navbar-bg);
             backdrop-filter: blur(20px) saturate(1.4);
             -webkit-backdrop-filter: blur(20px) saturate(1.4);
             border-bottom: 1px solid var(--glass-border);
             box-shadow: var(--glass-shadow);
+            color: var(--navbar-text);
         }
         .glass-sidebar {
             background: var(--sidebar-bg);
             backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
             border-right: 1px solid var(--glass-border);
+            color: var(--sidebar-text);
+        }
+        .glass-sidebar .nav-link { color: var(--sidebar-text); }
+        .glass-sidebar .nav-link:hover {
+            color: var(--sidebar-text);
+            background: rgba(255,255,255,0.1);
+        }
+        .glass-sidebar .nav-link.active {
+            background: rgba(255,255,255,0.15);
+            color: #ffffff;
+            box-shadow: inset 0 0 0 1px rgba(255,255,255,0.2);
         }
         .glass-dropdown {
             background: var(--dropdown-bg);
@@ -135,7 +155,7 @@
             transition: all 0.3s;
         }
         .page-card:hover {
-            border-color: rgba(139,92,246,0.15);
+            border-color: var(--accent, rgba(139,92,246,0.3));
             box-shadow: 0 12px 40px rgba(0,0,0,0.08);
         }
         .surface-card {
@@ -191,7 +211,7 @@
             <!-- Left: Hamburger + Logo + App Name -->
             <div class="flex items-center gap-3">
                 <button @click="sidebarOpen = !sidebarOpen"
-                    class="p-2 hover:bg-white/5 rounded-full text-gray-400 hover:text-white transition focus:outline-none"
+                    class="p-2 hover:bg-[var(--nav-link-hover)] rounded-full transition focus:outline-none"
                     aria-label="Toggle menu">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
@@ -199,15 +219,15 @@
                 </button>
                 <a href="{{ route('meeting.join.form') }}" class="flex items-center gap-2.5">
                     <img src="{{ asset('images/logo.png') }}" alt="Logo" class="h-8 w-auto object-contain">
-                    <span class="text-lg font-semibold text-gray-300 tracking-tight hidden sm:block">
+                    <span class="text-lg font-semibold tracking-tight hidden sm:block">
                         {{ config('app.name', 'MEET BPS') }}
                     </span>
                 </a>
             </div>
 
             <!-- Right: Theme Toggle + Clock + Profile Dropdown -->
-            <div class="flex items-center gap-2 md:gap-4 text-[var(--text-secondary)]">
-                <button id="themeToggle" class="theme-toggle-btn p-2 hover:bg-[var(--nav-link-hover)] rounded-full transition" title="Toggle tema">
+            <div class="flex items-center gap-2 md:gap-4">
+                <button id="themeToggle" class="theme-toggle-btn p-2 hover:bg-white/10 rounded-full transition" title="Toggle tema">
                     <svg id="themeIconSun" class="w-5 h-5 hidden" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/>
                     </svg>
@@ -215,12 +235,12 @@
                         <path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>
                     </svg>
                 </button>
-                <div class="hidden md:block text-sm font-medium px-2 text-[var(--text-muted)]" id="headerDateTime"></div>
+                <div class="hidden md:block text-sm font-medium px-2 opacity-80" id="headerDateTime"></div>
 
                 <!-- Avatar Dropdown -->
                 <div class="relative" x-data="{ open: false }">
                     <button @click="open = !open" @keydown.escape.window="open = false"
-                        class="flex items-center gap-2 p-1 rounded-full hover:bg-white/5 transition focus:outline-none focus:ring-2 focus:ring-violet-400">
+                        class="flex items-center gap-2 p-1 rounded-full hover:bg-[var(--nav-link-hover)] transition focus:outline-none focus:ring-2 focus:ring-violet-400">
                         <div class="w-9 h-9 rounded-full avatar-circle text-white flex items-center justify-center font-bold text-sm select-none">
                             {{ strtoupper(substr(auth()->user()?->name ?? 'U', 0, 1)) }}
                         </div>
@@ -236,14 +256,14 @@
                         class="absolute right-0 top-full mt-2 w-64 glass-dropdown rounded-2xl z-50 overflow-hidden">
 
                         <!-- User Info Header -->
-                        <div class="px-5 py-4 border-b border-white/5">
+                        <div class="px-5 py-4 border-b" style="border-color:var(--divider)">
                             <div class="flex items-center gap-3">
                                 <div class="w-11 h-11 rounded-full avatar-circle text-white flex items-center justify-center font-bold text-base flex-shrink-0">
                                     {{ strtoupper(substr(auth()->user()?->name ?? 'U', 0, 1)) }}
                                 </div>
                                 <div class="min-w-0">
-                                    <p class="font-semibold text-gray-200 text-sm truncate">{{ auth()->user()?->name }}</p>
-                                    <p class="text-xs text-gray-500 truncate">{{ auth()->user()?->email }}</p>
+                                    <p class="font-semibold text-[var(--text-primary)] text-sm truncate">{{ auth()->user()?->name }}</p>
+                                    <p class="text-xs text-[var(--text-muted)] truncate">{{ auth()->user()?->email }}</p>
                                 </div>
                             </div>
                         </div>
@@ -251,9 +271,9 @@
                         <!-- Menu Items -->
                         <div class="py-2 px-2">
                             <a href="{{ route('profile.show') }}"
-                                class="dropdown-item flex items-center gap-3 px-3 py-2.5 text-sm text-gray-300 group">
-                                <div class="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center flex-shrink-0 group-hover:bg-violet-500/20 transition">
-                                    <svg class="w-4 h-4 text-gray-400 group-hover:text-violet-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                class="dropdown-item flex items-center gap-3 px-3 py-2.5 text-sm group">
+                                <div class="w-8 h-8 rounded-full bg-[var(--nav-link-hover)] flex items-center justify-center flex-shrink-0 group-hover:bg-violet-500/20 transition">
+                                    <svg class="w-4 h-4 text-[var(--text-secondary)] group-hover:text-violet-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                                     </svg>
                                 </div>
@@ -262,9 +282,9 @@
 
                             @if (auth()->user()?->hasAnyRole(['super_admin', 'admin']))
                                 <a href="{{ route('admin.dashboard') }}"
-                                    class="dropdown-item flex items-center gap-3 px-3 py-2.5 text-sm text-gray-300 group">
-                                    <div class="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center flex-shrink-0 group-hover:bg-violet-500/20 transition">
-                                        <svg class="w-4 h-4 text-gray-400 group-hover:text-violet-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                    class="dropdown-item flex items-center gap-3 px-3 py-2.5 text-sm group">
+                                    <div class="w-8 h-8 rounded-full bg-[var(--nav-link-hover)] flex items-center justify-center flex-shrink-0 group-hover:bg-violet-500/20 transition">
+                                        <svg class="w-4 h-4 text-[var(--text-secondary)] group-hover:text-violet-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" d="M9 17V7m0 10a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h2a2 2 0 012 2m0 10a2 2 0 002 2h2a2 2 0 002-2M9 7a2 2 0 012-2h2a2 2 0 012 2m0 10V7m0 10a2 2 0 002 2h2a2 2 0 002-2V7a2 2 0 00-2-2h-2a2 2 0 00-2 2" />
                                         </svg>
                                     </div>
@@ -272,7 +292,7 @@
                                 </a>
                             @endif
 
-                            <div class="border-t border-white/5 my-2 mx-1"></div>
+                            <div class="border-t my-2 mx-1" style="border-color:var(--divider)"></div>
 
                             <a href="{{ route('logout') }}"
                                 class="dropdown-item flex items-center gap-3 px-3 py-2.5 text-sm text-red-400 group">
@@ -307,8 +327,8 @@
 
                 <!-- Close button (mobile only) -->
                 <div class="flex items-center justify-between mb-2 md:hidden">
-                    <span class="text-sm font-semibold text-gray-500 px-2">Menu</span>
-                    <button @click="sidebarOpen = false" class="p-1.5 hover:bg-white/5 rounded-full text-gray-500">
+                    <span class="text-sm font-semibold opacity-70 px-2">Menu</span>
+                    <button @click="sidebarOpen = false" class="p-1.5 hover:bg-white/10 rounded-full opacity-70">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
                         </svg>
@@ -317,7 +337,7 @@
 
                 @can('join_meeting')
                 <a href="{{ route('meeting.join.form') }}"
-                    class="nav-link flex items-center gap-3 font-medium py-2.5 px-4 mb-0.5 transition {{ request()->routeIs('meeting.join.form') ? 'active' : 'text-gray-400 hover:text-gray-200' }}">
+                    class="nav-link flex items-center gap-3 font-medium py-2.5 px-4 mb-0.5 transition {{ request()->routeIs('meeting.join.form') ? 'active' : '' }}">
                     <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
                     </svg>
@@ -326,7 +346,7 @@
                 @endcan
                 @can('access_user_agenda')
                 <a href="{{ route('meeting.agenda') }}"
-                    class="nav-link flex items-center gap-3 font-medium py-2.5 px-4 mb-0.5 transition {{ request()->routeIs('meeting.agenda') ? 'active' : 'text-gray-400 hover:text-gray-200' }}">
+                    class="nav-link flex items-center gap-3 font-medium py-2.5 px-4 mb-0.5 transition {{ request()->routeIs('meeting.agenda') ? 'active' : '' }}">
                     <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                     </svg>
@@ -335,7 +355,7 @@
                 @endcan
                 @can('manage_meeting_recording')
                 <a href="{{ route('video.index') }}"
-                    class="nav-link flex items-center gap-3 font-medium py-2.5 px-4 mb-0.5 transition {{ request()->routeIs('video.*') ? 'active' : 'text-gray-400 hover:text-gray-200' }}">
+                    class="nav-link flex items-center gap-3 font-medium py-2.5 px-4 mb-0.5 transition {{ request()->routeIs('video.*') ? 'active' : '' }}">
                     <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/>
                     </svg>
@@ -344,14 +364,14 @@
                 @endcan
                 @can('access_user_audio')
                 <a href="{{ route('audio.index') }}"
-                    class="nav-link flex items-center gap-3 font-medium py-2.5 px-4 mb-0.5 transition {{ request()->routeIs('audio.index') ? 'active' : 'text-gray-400 hover:text-gray-200' }}">
+                    class="nav-link flex items-center gap-3 font-medium py-2.5 px-4 mb-0.5 transition {{ request()->routeIs('audio.index') ? 'active' : '' }}">
                     <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z" />
                     </svg>
                     Audio Notulensi
                 </a>
                 <a href="{{ route('audio.history') }}"
-                    class="nav-link flex items-center gap-3 font-medium py-2.5 px-4 mb-0.5 transition {{ request()->routeIs('audio.history') || request()->routeIs('audio.show') || request()->routeIs('audio.edit') ? 'active' : 'text-gray-400 hover:text-gray-200' }}">
+                    class="nav-link flex items-center gap-3 font-medium py-2.5 px-4 mb-0.5 transition {{ request()->routeIs('audio.history') || request()->routeIs('audio.show') || request()->routeIs('audio.edit') ? 'active' : '' }}">
                     <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>

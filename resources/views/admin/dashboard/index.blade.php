@@ -4,64 +4,35 @@
 @section('content')
 
     {{-- =================== HERO BANNER =================== --}}
-    <div class="hero-banner"
-        style="
-    position: relative;
-    overflow: hidden;
-    border-radius: 20px;
-    margin-bottom: 28px;
-    min-height: 240px;
-    background: radial-gradient(ellipse 80% 100% at 70% 50%, #0a2a6e 0%, #0b1739 60%),
-                linear-gradient(135deg, #071836 0%, #0d2359 50%, #102b72 100%);
-    display: flex;
-    align-items: center;
-">
+    <div class="hero-banner">
         {{-- Decorative stars/sparkles --}}
-        <div style="position:absolute;inset:0;pointer-events:none;overflow:hidden">
-            <div class="sparkle"
-                style="top:15%;left:12%;width:6px;height:6px;background:#38bdf8;border-radius:50%;box-shadow:0 0 10px 4px rgba(56,189,248,.5);animation:twinkle 2.1s infinite alternate;">
-            </div>
-            <div class="sparkle"
-                style="top:60%;left:8%;width:4px;height:4px;background:#818cf8;border-radius:50%;box-shadow:0 0 8px 3px rgba(129,140,248,.5);animation:twinkle 2.8s 0.4s infinite alternate;">
-            </div>
-            <div class="sparkle"
-                style="top:30%;left:40%;width:5px;height:5px;background:#f0abfc;border-radius:50%;box-shadow:0 0 8px 3px rgba(240,171,252,.4);animation:twinkle 1.9s 0.8s infinite alternate;">
-            </div>
-            <div class="sparkle"
-                style="top:75%;left:30%;width:4px;height:4px;background:#38bdf8;border-radius:50%;box-shadow:0 0 7px 3px rgba(56,189,248,.4);animation:twinkle 2.5s 0.2s infinite alternate;">
-            </div>
-            {{-- Glowing rings --}}
-            <div
-                style="position:absolute;bottom:-40px;left:80%;width:180px;height:180px;border:1.5px solid rgba(56,189,248,0.18);border-radius:50%;animation:pulse-ring 3s ease-in-out infinite;">
-            </div>
-            <div
-                style="position:absolute;bottom:-60px;left:calc(80% - 30px);width:240px;height:240px;border:1.5px solid rgba(99,102,241,0.13);border-radius:50%;animation:pulse-ring 4s 1s ease-in-out infinite;">
-            </div>
-            {{-- Neon arc glow --}}
-            <div
-                style="position:absolute;top:50%;right:0;width:55%;height:120%;transform:translateY(-50%);background:radial-gradient(ellipse 70% 80% at 90% 50%,rgba(56,189,248,0.07) 0%,transparent 70%);pointer-events:none;">
-            </div>
+        <div class="hero-sparkles">
+            <div class="h-s-1"></div>
+            <div class="h-s-2"></div>
+            <div class="h-s-3"></div>
+            <div class="h-s-4"></div>
+            <div class="h-ring-1"></div>
+            <div class="h-ring-2"></div>
+            <div class="h-arc"></div>
         </div>
 
         {{-- Left: Text content --}}
-        <div style="flex:1;padding:36px 40px;position:relative;z-index:2;max-width:55%">
-            <div
-                style="display:inline-flex;align-items:center;gap:7px;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.12);border-radius:99px;padding:5px 14px;margin-bottom:16px;">
-                <div style="width:7px;height:7px;border-radius:50%;background:#38bdf8;box-shadow:0 0 6px #38bdf8;"></div>
-                <span style="font-size:12px;font-weight:600;color:#e0f2fe;letter-spacing:0.04em">Selamat Datang</span>
+        <div class="hero-text">
+            <div class="hero-badge">
+                <div class="h-badge-dot"></div>
+                <span class="h-badge-label">Selamat Datang</span>
             </div>
 
-            <h1
-                style="font-size:clamp(22px,3vw,30px);font-weight:800;color:#fff;line-height:1.25;margin:0 0 12px;letter-spacing:-0.02em">
+            <h1 class="hero-title">
                 Siap untuk rapat yang<br>
-                lebih <span style="color:#38bdf8">produktif</span> hari ini? 🚀
+                lebih <span class="h-title-accent">produktif</span> hari ini? 🚀
             </h1>
 
-            <p style="font-size:13px;color:#94b3cc;line-height:1.65;margin:0 0 8px;">
+            <p class="hero-desc">
                 Kelola meeting dengan mudah, dokumentasi otomatis,<br>
                 dan simpan setiap momen penting.
             </p>
-            <p style="font-size:12px;font-weight:600;color:#c0d9f0;margin:0 0 24px;">
+            <p class="hero-tagline">
                 Bersama BPS, Data Berkualitas, Indonesia Maju! ✨
             </p>
 
@@ -340,7 +311,7 @@
     </div>{{-- end hero banner --}}
 
     {{-- =================== ACTIVITY SUMMARY =================== --}}
-    <h2 style="font-size:16px;font-weight:700;color:#fff;margin:0 0 16px;letter-spacing:-0.01em">
+    <h2 style="font-size:16px;font-weight:700;color:var(--text-primary);margin:0 0 16px;letter-spacing:-0.01em">
         Ringkasan Aktivitas
     </h2>
 
@@ -358,9 +329,9 @@
                 </div>
             </div>
             <div
-                style="font-size:12px;color:#94a3b8;font-weight:500;margin-bottom:4px;text-transform:uppercase;letter-spacing:0.05em">
+                style="font-size:12px;color:var(--text-secondary);font-weight:500;margin-bottom:4px;text-transform:uppercase;letter-spacing:0.05em">
                 Total Meeting</div>
-            <div style="font-size:32px;font-weight:800;color:#fff;letter-spacing:-0.02em;line-height:1">
+            <div style="font-size:32px;font-weight:800;color:var(--text-primary);letter-spacing:-0.02em;line-height:1">
                 {{ $stats['total_meetings'] }}</div>
             <div class="stat-wave" style="border-color:#3b82f6;margin-top:12px">
                 <svg viewBox="0 0 80 20" fill="none" xmlns="http://www.w3.org/2000/svg" width="80"
@@ -384,9 +355,9 @@
                 </div>
             </div>
             <div
-                style="font-size:12px;color:#94a3b8;font-weight:500;margin-bottom:4px;text-transform:uppercase;letter-spacing:0.05em">
+                style="font-size:12px;color:var(--text-secondary);font-weight:500;margin-bottom:4px;text-transform:uppercase;letter-spacing:0.05em">
                 Rekaman Audio</div>
-            <div style="font-size:32px;font-weight:800;color:#fff;letter-spacing:-0.02em;line-height:1">
+            <div style="font-size:32px;font-weight:800;color:var(--text-primary);letter-spacing:-0.02em;line-height:1">
                 {{ $stats['total_rekaman'] }}</div>
             <div class="stat-wave" style="margin-top:12px">
                 <svg viewBox="0 0 80 20" fill="none" xmlns="http://www.w3.org/2000/svg" width="80"
@@ -410,9 +381,9 @@
                 </div>
             </div>
             <div
-                style="font-size:12px;color:#94a3b8;font-weight:500;margin-bottom:4px;text-transform:uppercase;letter-spacing:0.05em">
+                style="font-size:12px;color:var(--text-secondary);font-weight:500;margin-bottom:4px;text-transform:uppercase;letter-spacing:0.05em">
                 Transkripsi</div>
-            <div style="font-size:32px;font-weight:800;color:#fff;letter-spacing:-0.02em;line-height:1">
+            <div style="font-size:32px;font-weight:800;color:var(--text-primary);letter-spacing:-0.02em;line-height:1">
                 {{ $stats['total_transkripsi'] }}</div>
             <div class="stat-wave" style="margin-top:12px">
                 <svg viewBox="0 0 80 20" fill="none" xmlns="http://www.w3.org/2000/svg" width="80"
@@ -436,9 +407,9 @@
                 </div>
             </div>
             <div
-                style="font-size:12px;color:#94a3b8;font-weight:500;margin-bottom:4px;text-transform:uppercase;letter-spacing:0.05em">
+                style="font-size:12px;color:var(--text-secondary);font-weight:500;margin-bottom:4px;text-transform:uppercase;letter-spacing:0.05em">
                 Notulensi</div>
-            <div style="font-size:32px;font-weight:800;color:#fff;letter-spacing:-0.02em;line-height:1">
+            <div style="font-size:32px;font-weight:800;color:var(--text-primary);letter-spacing:-0.02em;line-height:1">
                 {{ $stats['total_notulensi'] }}</div>
             <div class="stat-wave" style="margin-top:12px">
                 <svg viewBox="0 0 80 20" fill="none" xmlns="http://www.w3.org/2000/svg" width="80"
@@ -455,8 +426,8 @@
     {{-- =================== RECENT MEETINGS TABLE =================== --}}
     <div class="card" style="overflow:hidden">
         <div
-            style="display:flex;align-items:center;justify-content:space-between;padding:18px 20px;border-bottom:1px solid rgba(255,255,255,0.07)">
-            <h3 style="font-size:14px;font-weight:700;color:#fff;margin:0">Rapat Terbaru</h3>
+            style="display:flex;align-items:center;justify-content:space-between;padding:18px 20px;border-bottom:1px solid var(--divider)">
+            <h3 style="font-size:14px;font-weight:700;color:var(--text-primary);margin:0">Rapat Terbaru</h3>
             <a href="{{ route('admin.meetings.index') }}"
                 style="font-size:12px;color:#3b82f6;font-weight:600;text-decoration:none;display:flex;align-items:center;gap:4px;transition:opacity .2s"
                 onmouseover="this.style.opacity='.7'" onmouseout="this.style.opacity='1'">
@@ -481,12 +452,12 @@
                 <tbody>
                     @foreach ($recentMeetings as $m)
                         <tr>
-                            <td style="font-weight:600;color:#e2e8f0">{{ $m->nama_rapat }}</td>
+                            <td style="font-weight:600;color:var(--text-primary)">{{ $m->nama_rapat }}</td>
                             <td>
                                 <span class="badge"
                                     style="
-                        background:{{ $m->tipe_rapat === 'Online' ? 'rgba(59,130,246,0.15)' : 'rgba(245,158,11,0.15)' }};
-                        color:{{ $m->tipe_rapat === 'Online' ? '#60a5fa' : '#fbbf24' }};
+                        background:{{ $m->tipe_rapat === 'Online' ? 'rgba(59,130,246,0.12)' : 'rgba(245,158,11,0.12)' }};
+                        color:{{ $m->tipe_rapat === 'Online' ? '#2563eb' : '#d97706' }};
                     ">{{ $m->tipe_rapat }}</span>
                             </td>
                             <td>{{ \Carbon\Carbon::parse($m->tanggal)->translatedFormat('d M Y') }}
@@ -494,8 +465,8 @@
                             <td>
                                 <span class="badge"
                                     style="
-                        background:{{ $m->status_rapat === 'Berlangsung' ? 'rgba(16,185,129,0.15)' : 'rgba(99,102,241,0.15)' }};
-                        color:{{ $m->status_rapat === 'Berlangsung' ? '#34d399' : '#818cf8' }};
+                        background:{{ $m->status_rapat === 'Berlangsung' ? 'rgba(16,185,129,0.12)' : 'rgba(99,102,241,0.12)' }};
+                        color:{{ $m->status_rapat === 'Berlangsung' ? '#059669' : '#4f46e5' }};
                     ">{{ $m->status_rapat }}</span>
                             </td>
                         </tr>
@@ -505,16 +476,146 @@
         @else
             <div style="padding:48px;text-align:center">
                 <svg width="40" height="40" fill="none" stroke="currentColor" stroke-width="1.5"
-                    viewBox="0 0 24 24" style="margin:0 auto 12px;color:#334155">
+                    viewBox="0 0 24 24" style="margin:0 auto 12px;color:var(--text-muted)">
                     <path stroke-linecap="round" stroke-linejoin="round"
                         d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                 </svg>
-                <p style="color:#475569;font-size:13px">Belum ada rapat yang tercatat.</p>
+                <p style="color:var(--text-secondary);font-size:13px">Belum ada rapat yang tercatat.</p>
             </div>
         @endif
     </div>
 
     <style>
+        /* =================== HERO BANNER =================== */
+        .hero-banner {
+            position: relative;
+            overflow: hidden;
+            border-radius: 20px;
+            margin-bottom: 28px;
+            min-height: 240px;
+            display: flex;
+            align-items: center;
+            background: radial-gradient(ellipse 80% 100% at 70% 50%, #1e40af 0%, #1e3a8a 60%),
+                        linear-gradient(135deg, #172554 0%, #1e3a8a 50%, #3b82f6 100%);
+        }
+        :root:not(.dark) .hero-banner {
+            background: linear-gradient(135deg, #e0f2fe 0%, #bae6fd 30%, #7dd3fc 60%, #38bdf8 100%);
+        }
+        :root:not(.dark) .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            background: rgba(255,255,255,0.85);
+            border: 1px solid rgba(255,255,255,0.9);
+            border-radius: 99px;
+            padding: 5px 14px;
+            margin-bottom: 16px;
+        }
+        :root:not(.dark) .h-badge-dot {
+            width: 7px; height: 7px;
+            border-radius: 50%;
+            background: #0284c7;
+            box-shadow: 0 0 6px #0284c7;
+        }
+        :root:not(.dark) .h-badge-label {
+            font-size: 12px;
+            font-weight: 600;
+            color: #0369a1;
+            letter-spacing: 0.04em;
+        }
+        :root:not(.dark) .hero-title {
+            font-size: clamp(22px,3vw,30px);
+            font-weight: 800;
+            color: #0c4a6e;
+            line-height: 1.25;
+            margin: 0 0 12px;
+            letter-spacing: -0.02em;
+        }
+        :root:not(.dark) .h-title-accent { color: #0369a1; }
+        :root:not(.dark) .hero-desc {
+            font-size: 13px;
+            color: #0c4a6e;
+            line-height: 1.65;
+            margin: 0 0 8px;
+            opacity: 0.8;
+        }
+        :root:not(.dark) .hero-tagline {
+            font-size: 12px;
+            font-weight: 600;
+            color: #0c4a6e;
+            margin: 0 0 24px;
+            opacity: 0.7;
+        }
+
+        .dark .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.12);
+            border-radius: 99px;
+            padding: 5px 14px;
+            margin-bottom: 16px;
+        }
+        .dark .h-badge-dot {
+            width: 7px; height: 7px;
+            border-radius: 50%;
+            background: #38bdf8;
+            box-shadow: 0 0 6px #38bdf8;
+        }
+        .dark .h-badge-label {
+            font-size: 12px;
+            font-weight: 600;
+            color: #e0f2fe;
+            letter-spacing: 0.04em;
+        }
+        .dark .hero-title {
+            font-size: clamp(22px,3vw,30px);
+            font-weight: 800;
+            color: #fff;
+            line-height: 1.25;
+            margin: 0 0 12px;
+            letter-spacing: -0.02em;
+        }
+        .dark .h-title-accent { color: #38bdf8; }
+        .dark .hero-desc {
+            font-size: 13px;
+            color: #94b3cc;
+            line-height: 1.65;
+            margin: 0 0 8px;
+        }
+        .dark .hero-tagline {
+            font-size: 12px;
+            font-weight: 600;
+            color: #c0d9f0;
+            margin: 0 0 24px;
+        }
+
+        .hero-text {
+            flex: 1;
+            padding: 36px 40px;
+            position: relative;
+            z-index: 2;
+            max-width: 55%;
+        }
+
+        .hero-sparkles { position:absolute;inset:0;pointer-events:none;overflow:hidden; }
+
+        .h-s-1 { top:15%;left:12%;width:6px;height:6px;background:#38bdf8;box-shadow:0 0 10px 4px rgba(56,189,248,.5);animation:twinkle 2.1s infinite alternate; }
+        .h-s-2 { top:60%;left:8%;width:4px;height:4px;background:#818cf8;box-shadow:0 0 8px 3px rgba(129,140,248,.5);animation:twinkle 2.8s 0.4s infinite alternate; }
+        .h-s-3 { top:30%;left:40%;width:5px;height:5px;background:#f0abfc;box-shadow:0 0 8px 3px rgba(240,171,252,.4);animation:twinkle 1.9s 0.8s infinite alternate; }
+        .h-s-4 { top:75%;left:30%;width:4px;height:4px;background:#38bdf8;box-shadow:0 0 7px 3px rgba(56,189,248,.4);animation:twinkle 2.5s 0.2s infinite alternate; }
+        .h-ring-1 { position:absolute;bottom:-40px;left:80%;width:180px;height:180px;border:1.5px solid rgba(56,189,248,0.18);border-radius:50%;animation:pulse-ring 3s ease-in-out infinite; }
+        .h-ring-2 { position:absolute;bottom:-60px;left:calc(80% - 30px);width:240px;height:240px;border:1.5px solid rgba(99,102,241,0.13);border-radius:50%;animation:pulse-ring 4s 1s ease-in-out infinite; }
+        .h-arc { position:absolute;top:50%;right:0;width:55%;height:120%;transform:translateY(-50%);background:radial-gradient(ellipse 70% 80% at 90% 50%,rgba(56,189,248,0.07) 0%,transparent 70%);pointer-events:none; }
+
+        :root:not(.dark) .h-s-1, :root:not(.dark) .h-s-4 { background:#0284c7; box-shadow:0 0 10px 4px rgba(2,132,199,.4); }
+        :root:not(.dark) .h-s-2 { background:#6366f1; box-shadow:0 0 8px 3px rgba(99,102,241,.4); }
+        :root:not(.dark) .h-s-3 { background:#d946ef; box-shadow:0 0 8px 3px rgba(217,70,239,.3); }
+        :root:not(.dark) .h-ring-1 { border-color:rgba(2,132,199,0.2); }
+        :root:not(.dark) .h-ring-2 { border-color:rgba(99,102,241,0.15); }
+        :root:not(.dark) .h-arc { background:radial-gradient(ellipse 70% 80% at 90% 50%,rgba(2,132,199,0.08) 0%,transparent 70%); }
+
         /* Hero button */
         .hero-btn-primary {
             display: inline-flex;
@@ -559,8 +660,8 @@
         }
 
         .stat-card {
-            background: rgba(255, 255, 255, 0.04);
-            border: 1px solid rgba(255, 255, 255, 0.08);
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
             border-radius: 16px;
             padding: 20px;
             transition: transform .25s, box-shadow .25s, border-color .25s;
@@ -568,8 +669,8 @@
 
         .stat-card:hover {
             transform: translateY(-3px);
-            box-shadow: 0 12px 36px rgba(0, 0, 0, 0.35);
-            border-color: rgba(255, 255, 255, 0.14);
+            box-shadow: 0 12px 36px rgba(0, 0, 0, 0.2);
+            border-color: var(--accent);
         }
 
         .stat-icon {
@@ -589,8 +690,8 @@
 
         /* Info cards */
         .info-card {
-            background: rgba(255, 255, 255, 0.04);
-            border: 1px solid rgba(255, 255, 255, 0.08);
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
             border-radius: 16px;
             padding: 22px;
             transition: transform .25s, box-shadow .25s;
@@ -598,7 +699,7 @@
 
         .info-card:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 28px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 8px 28px rgba(0, 0, 0, 0.15);
         }
 
         /* Sparkle animation */

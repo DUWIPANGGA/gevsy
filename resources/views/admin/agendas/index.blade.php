@@ -5,7 +5,8 @@
 <style>
     .fc { font-family: 'Inter', ui-sans-serif, system-ui, sans-serif; }
     .fc-theme-standard th { border-color: var(--divider); padding:8px 0; font-weight:500; color: var(--text-secondary); }
-    .fc-theme-standard td, .fc-theme-standard th { border-color: var(--divider); }
+    .fc-theme-standard td, .fc-theme-standard th { border-color: #cbd5e1; }
+    .dark .fc-theme-standard td, .dark .fc-theme-standard th { border-color: rgba(255,255,255,0.08); }
     .fc .fc-button-primary { background: var(--surface-bg); border-color: var(--card-border); color: var(--text-secondary); text-transform:capitalize; }
     .fc .fc-button-primary:not(:disabled):active,
     .fc .fc-button-primary:not(:disabled).fc-button-active,
@@ -16,7 +17,8 @@
     .fc-event { cursor:pointer; border-radius:4px; padding:3px 6px; font-size:0.85em; border:none; }
     .fc-toolbar-title { font-size:1.25rem !important; font-weight:500 !important; color: var(--text-primary); }
     .fc .fc-day-other .fc-daygrid-day-number { color: var(--text-muted); }
-    .fc .fc-scrollgrid { border-color: var(--divider); }
+    .fc .fc-scrollgrid { border-color: #cbd5e1; }
+    .dark .fc .fc-scrollgrid { border-color: rgba(255,255,255,0.08); }
     .fc .fc-popover { background: var(--card-bg); border-color: var(--card-border); }
     .fc .fc-popover-title { color: var(--text-primary); }
     .fc .fc-popover-header { background: var(--surface-bg); }
@@ -82,7 +84,7 @@
                     </a>
                 </template>
                 <template x-if="selectedEvent.tipe === 'offline'">
-                    <div class="w-full flex items-center justify-center gap-2 py-2.5 px-4 rounded-lg bg-slate-50 text-sm" style="color:#94a3b8">
+                    <div class="w-full flex items-center justify-center gap-2 py-2.5 px-4 rounded-lg text-sm" style="color:var(--text-muted);background:var(--surface-bg)">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
                         Kegiatan Offline
                     </div>

@@ -42,11 +42,11 @@
                             @forelse($user->roles as $role)
                                 <span class="badge" style="background:rgba(124,58,237,0.1);color:#7c3aed">{{ ucfirst($role->name) }}</span>
                             @empty
-                                <span class="badge" style="background:rgba(148,163,184,0.1);color:#94a3b8">Tidak ada role</span>
+                                <span class="badge" style="background:var(--hover-bg);color:var(--text-muted)">Tidak ada role</span>
                             @endforelse
                         </div>
                     </td>
-                    <td style="color:#94a3b8">{{ $user->created_at->translatedFormat('d M Y') }}</td>
+                    <td style="color:var(--text-muted)">{{ $user->created_at->translatedFormat('d M Y') }}</td>
                     <td>
                         <div class="flex items-center justify-end gap-2">
                             <a href="{{ route('admin.users.show', $user) }}" class="p-2 rounded-lg hover:bg-[var(--nav-link-hover)] transition" title="Detail">

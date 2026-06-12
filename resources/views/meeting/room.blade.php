@@ -8,25 +8,31 @@
 
         /* ── Theme variables ── */
         :root {
-            --meeting-bg: radial-gradient(ellipse 80% 60% at 20% 80%, rgba(139,92,246,0.08) 0%, transparent 60%),
-                           radial-gradient(ellipse 60% 50% at 80% 20%, rgba(6,182,212,0.06) 0%, transparent 50%),
-                           radial-gradient(ellipse 50% 40% at 50% 50%, rgba(236,72,153,0.05) 0%, transparent 40%),
-                           linear-gradient(160deg, #d4d6dd 0%, #c8cad2 50%, #c0c2ca 100%);
-            --grid-bg: rgba(255,255,255,0.55);
-            --grid-border: rgba(0,0,0,0.06);
-            --card-bg: rgba(255,255,255,0.78);
-            --card-border: rgba(0,0,0,0.08);
-            --card-shadow: 0 8px 32px rgba(0,0,0,0.12);
-            --screen-share-bg: rgba(240,242,245,0.85);
-            --toolbar-bg: rgba(230,232,238,0.88);
-            --toolbar-border: rgba(0,0,0,0.06);
-            --sidebar-bg: rgba(230,232,238,0.92);
-            --sidebar-border: rgba(0,0,0,0.06);
-            --text-primary: #1f2937;
-            --text-secondary: #6b7280;
-            --name-label-bg: rgba(0,0,0,0.08);
+            --meeting-bg: radial-gradient(ellipse 80% 60% at 20% 80%, rgba(139,92,246,0.06) 0%, transparent 60%),
+                           radial-gradient(ellipse 60% 50% at 80% 20%, rgba(6,182,212,0.04) 0%, transparent 50%),
+                           linear-gradient(160deg, #e2e8f0 0%, #f1f5f9 50%, #f8fafc 100%);
+            --grid-bg: rgba(0,0,0,0.03);
+            --grid-border: #e2e8f0;
+            --card-bg: rgba(255,255,255,0.85);
+            --card-border: #e2e8f0;
+            --card-shadow: 0 8px 32px rgba(0,0,0,0.08);
+            --screen-share-bg: rgba(255,255,255,0.85);
+            --toolbar-bg: rgba(255,255,255,0.85);
+            --toolbar-border: #e2e8f0;
+            --sidebar-bg: rgba(255,255,255,0.92);
+            --sidebar-border: #e2e8f0;
+            --text-primary: #0f172a;
+            --text-secondary: #334155;
+            --text-muted: #64748b;
+            --name-label-bg: rgba(0,0,0,0.5);
             --rec-bg: linear-gradient(135deg, #ef4444, #dc2626);
-            --meeting-container-bg: rgba(0,0,0,0.05);
+            --meeting-container-bg: rgba(0,0,0,0.03);
+            --hover-bg: rgba(0,0,0,0.05);
+            --icon-color: #334155;
+            --icon-hover: #0f172a;
+            --toolbar-icon: #334155;
+            --toolbar-icon-hover: #0f172a;
+            --page-color: #0f172a;
         }
         :root.dark, .dark {
             --meeting-bg: radial-gradient(ellipse 80% 60% at 20% 80%, rgba(139,92,246,0.12) 0%, transparent 60%),
@@ -48,6 +54,12 @@
             --name-label-bg: rgba(0,0,0,0.5);
             --rec-bg: linear-gradient(135deg, #ef4444, #dc2626);
             --meeting-container-bg: rgba(0,0,0,0.35);
+            --hover-bg: rgba(255,255,255,0.08);
+            --icon-color: #fff;
+            --icon-hover: #e5e7eb;
+            --toolbar-icon: #fff;
+            --toolbar-icon-hover: #e5e7eb;
+            --page-color: #fff;
         }
 
         .custom-scrollbar::-webkit-scrollbar { width: 6px; }
@@ -195,6 +207,28 @@
             backdrop-filter: blur(8px);
             transform: translateZ(0);
         }
+
+        /* ── Theme-aware colors (override Tailwind text-white) ── */
+        :root .meeting-bg { color: var(--page-color); }
+        :root .meeting-bg .toolbar-btn { color: var(--toolbar-icon); }
+        :root .meeting-bg .toolbar-btn:hover { color: var(--toolbar-icon-hover); }
+        :root .sidebar-item { background: var(--hover-bg); border-color: var(--card-border); }
+        :root .top-bar h1 { color: var(--page-color); }
+        :root .top-bar .text-white { color: var(--page-color); }
+        :root .top-bar .text-white\/70 { color: var(--text-secondary); opacity: 0.85; }
+        :root .top-bar .text-white\/70:hover { color: var(--page-color); opacity: 1; }
+        :root #roomThemeToggle svg { color: var(--page-color); }
+        :root .participant-sidebar h2 { color: var(--page-color); }
+        :root .participant-sidebar .text-gray-500 { color: var(--text-muted); }
+        :root .participant-sidebar .text-gray-500:hover { color: var(--page-color); }
+        :root #participantList { color: var(--text-secondary); }
+        :root #participantList .text-gray-200 { color: var(--text-secondary); }
+        :root #participantList .text-gray-200:hover { color: var(--page-color); }
+        :root #participantList .text-gray-300 { color: var(--text-secondary); }
+        .dark .top-bar h1 { color: #fff; }
+        .dark .top-bar .text-white { color: #fff; }
+        .dark .top-bar .text-white\/70 { color: rgba(255,255,255,0.7); }
+        .dark .top-bar .text-white\/70:hover { color: #fff; }
 
         /* ── Glow button (Akhiri) ── */
         .btn-danger {
