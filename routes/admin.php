@@ -42,12 +42,18 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
         Route::get('arsips', [ArsipController::class, 'index'])->name('arsips.index');
     });
 
-    // Rekaman Audio & Video
+    // Rekaman Audio
     Route::middleware('user.permission:AdminAccessRekamanAudio')->group(function () {
         Route::get('rekaman-audio', [RekamanAudioController::class, 'index'])->name('rekaman-audio.index');
-        Route::get('rekaman-audio/{rekaman}/stream', [RekamanAudioController::class, 'stream'])->name('rekaman-audio.stream');
-        Route::get('rekaman-audio/{rekaman}/download', [RekamanAudioController::class, 'download'])->name('rekaman-audio.download');
         Route::delete('rekaman-audio/{rekaman}', [RekamanAudioController::class, 'destroy'])->name('rekaman-audio.destroy');
+    });
+
+    // Rekaman Video
+    Route::middleware('user.permission:AdminAccessRekamanAudio')->group(function () {
+        Route::get('rekaman-video', [RekamanAudioController::class, 'videoIndex'])->name('rekaman-video.index');
+        Route::get('rekaman-video/{rekaman}/stream', [RekamanAudioController::class, 'stream'])->name('rekaman-video.stream');
+        Route::get('rekaman-video/{rekaman}/download', [RekamanAudioController::class, 'download'])->name('rekaman-video.download');
+        Route::delete('rekaman-video/{rekaman}', [RekamanAudioController::class, 'destroy'])->name('rekaman-video.destroy');
     });
 
 });

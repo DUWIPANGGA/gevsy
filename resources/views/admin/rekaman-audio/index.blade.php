@@ -5,18 +5,10 @@
 <div x-data="adminAudio()">
     <div class="page-header flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
-            <h1>Rekaman Audio & Video</h1>
-            <p>Total {{ $rekamans->total() }} rekaman tersimpan</p>
+            <h1>Rekaman Audio</h1>
+            <p>Total {{ $rekamans->total() }} rekaman audio tersimpan</p>
         </div>
         <div class="flex items-center gap-3">
-            <form method="GET" action="{{ route('admin.rekaman-audio.index') }}" class="flex items-center gap-2">
-                <select name="tipe" onchange="this.form.submit()"
-                        class="text-sm rounded-lg px-3 py-2 border" style="background:var(--card-bg);color:var(--text-primary);border-color:var(--card-border);outline:none">
-                    <option value="">Semua Tipe</option>
-                    <option value="audio" {{ request('tipe') === 'audio' ? 'selected' : '' }}>Audio</option>
-                    <option value="video" {{ request('tipe') === 'video' ? 'selected' : '' }}>Video</option>
-                </select>
-            </form>
             <button @click="openModal" type="button" class="btn-primary shrink-0">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>
                 Tambah Audio
@@ -31,7 +23,6 @@
             <thead>
                 <tr>
                     <th>Meeting</th>
-                    <th>Tipe</th>
                     <th>Durasi</th>
                     <th>Tanggal Upload</th>
                     <th>Status</th>
@@ -43,36 +34,18 @@
                 <tr>
                     <td>
                         <div class="flex items-center gap-3">
-                            <div class="w-8 h-8 rounded-lg flex items-center justify-center shrink-0" style="background:{{ $rek->tipe_rekaman === 'video' ? 'rgba(124,58,237,0.1)' : 'rgba(34,197,94,0.1)' }}">
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="color:{{ $rek->tipe_rekaman === 'video' ? '#7c3aed' : '#22c55e' }}">{{ $rek->tipe_rekaman === 'video' ? '<path stroke-linecap="round" stroke-linejoin="round" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/>' : '<path stroke-linecap="round" stroke-linejoin="round" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"/>' }}</svg>
+                            <div class="w-8 h-8 rounded-lg flex items-center justify-center shrink-0" style="background:rgba(34,197,94,0.1)">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="color:#22c55e"><path stroke-linecap="round" stroke-linejoin="round" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"/></svg>
                             </div>
                             <span class="font-medium" style="color:var(--text-primary)">{{ $rek->meeting?->nama_rapat ?? '-' }}</span>
                         </div>
-                    </td>
-                    <td>
-                        @if($rek->tipe_rekaman === 'video')
-                            <span class="badge" style="background:rgba(124,58,237,0.1);color:#7c3aed">Video</span>
-                        @else
-                            <span class="badge" style="background:rgba(34,197,94,0.1);color:#22c55e">Audio</span>
-                        @endif
                     </td>
                     <td>{{ $rek->durasi ?? '-' }}</td>
                     <td>{{ $rek->tanggal_upload ? \Carbon\Carbon::parse($rek->tanggal_upload)->translatedFormat('d M Y') : $rek->created_at->translatedFormat('d M Y') }}</td>
                     <td><span class="badge" style="background:rgba(99,102,241,0.1);color:#6366f1">{{ $rek->pipeline_status ?? 'Selesai' }}</span></td>
                     <td>
                         <div class="flex items-center justify-end gap-1">
-                            @if($rek->tipe_rekaman === 'video')
-                                <a href="{{ route('admin.rekaman-audio.stream', $rek->id) }}" target="_blank"
-                                   class="p-2 rounded-lg hover:bg-[var(--nav-link-hover)] transition" title="Putar">
-                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="color:#7c3aed"><path stroke-linecap="round" stroke-linejoin="round" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"/><path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-                                </a>
-                                <a href="{{ route('admin.rekaman-audio.download', $rek->id) }}"
-                                   class="p-2 rounded-lg hover:bg-[var(--nav-link-hover)] transition" title="Download">
-                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="color:var(--text-secondary)"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
-                                </a>
-                            @else
-                                <span class="text-xs" style="color:var(--text-muted)">-</span>
-                            @endif
+                            <span class="text-xs" style="color:var(--text-muted)">-</span>
                             <form action="{{ route('admin.rekaman-audio.destroy', $rek->id) }}" method="POST" onsubmit="return confirm('Yakin ingin menghapus rekaman ini?');" class="inline">
                                 @csrf @method('DELETE')
                                 <button type="submit" class="p-2 rounded-lg hover:bg-red-500/10 transition" title="Hapus">

@@ -11,16 +11,20 @@ class RekamanAudioController extends Controller
 {
     public function index(Request $request)
     {
-        $query = RekamanAudio::with('meeting');
-
-        if ($request->filled('tipe')) {
-            $query->where('tipe_rekaman', $request->tipe);
-        }
+        $query = RekamanAudio::with('meeting')->where('tipe_rekaman', 'audio');
 
         $rekamans = $query->latest()->paginate(20)->withQueryString();
-        $tipe = $request->tipe;
 
-        return view('admin.rekaman-audio.index', compact('rekamans', 'tipe'));
+        return view('admin.rekaman-audio.index', compact('rekamans'));
+    }
+
+    public function videoIndex(Request $request)
+    {
+        $query = RekamanAudio::with('meeting')->where('tipe_rekaman', 'video');
+
+        $rekamans = $query->latest()->paginate(20)->withQueryString();
+
+        return view('admin.rekaman-video.index', compact('rekamans'));
     }
 
     public function stream(RekamanAudio $rekaman)
@@ -67,7 +71,7 @@ class RekamanAudioController extends Controller
         ]);
     }
 
-    public function destroy(RekamanAudio $rekaman)
+    public function destroy(RekamanAudio $rekaman, Request $request)
     {
         $disk = Storage::disk('local');
         if ($rekaman->raw_recording_path && $disk->exists($rekaman->raw_recording_path)) {
@@ -76,7 +80,11 @@ class RekamanAudioController extends Controller
 
         $rekaman->delete();
 
-        return redirect()->route('admin.rekaman-audio.index')
+        $redirectRoute = $rekaman->tipe_rekaman === 'video'
+            ? 'admin.rekaman-video.index'
+            : 'admin.rekaman-audio.index';
+
+        return redirect()->route($redirectRoute)
             ->with('success', 'Rekaman berhasil dihapus.');
     }
 }
